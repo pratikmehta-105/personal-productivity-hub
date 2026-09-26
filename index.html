@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7f8fc">
+  <meta name="description" content="Personal Productivity Hub - one place for your everyday apps and quick actions.">
+  <title>Personal Productivity Hub</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">✦</div>
+        <div><strong>Personal Hub</strong><span>Productivity</span></div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-section="home">🏠 <span>Home</span></button>
+        <button class="nav-item" data-section="apps">🧩 <span>My Apps</span></button>
+        <button class="nav-item" data-section="notes">📝 <span>Quick Notes</span></button>
+        <button class="nav-item" data-section="tasks">✅ <span>Quick Tasks</span></button>
+        <button class="nav-item" data-section="tools">🛠️ <span>Tools</span></button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button class="nav-item" data-section="settings">⚙️ <span>Settings</span></button>
+        <div class="version">Version 1.0</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+        <div>
+          <div class="eyebrow" id="todayLabel">Today</div>
+          <h1 id="pageTitle">Good day 👋</h1>
+        </div>
+        <div class="top-actions">
+          <button class="icon-btn" id="themeBtn" title="Toggle theme">☾</button>
+          <button class="profile-btn" id="profileBtn" title="Set your name">P</button>
+        </div>
+      </header>
+
+      <section id="home" class="section active">
+        <div class="hero">
+          <div>
+            <span class="pill">PERSONAL DASHBOARD</span>
+            <h2>Your day, in one place.</h2>
+            <p>Open your favorite services, keep quick notes and manage simple tasks without mixing anything with your business workspace.</p>
+          </div>
+          <button class="primary" data-section-jump="apps">Open My Apps →</button>
+        </div>
+
+        <div class="grid stats-grid">
+          <article class="card stat-card"><span>📅</span><div><small>Calendar</small><strong>Open Calendar</strong></div><button class="mini" data-url="https://calendar.google.com">Open ↗</button></article>
+          <article class="card stat-card"><span>✅</span><div><small>Tasks</small><strong>Google Tasks</strong></div><button class="mini" data-url="https://tasks.google.com">Open ↗</button></article>
+          <article class="card stat-card"><span>📝</span><div><small>Notes</small><strong>Google Keep</strong></div><button class="mini" data-url="https://keep.google.com">Open ↗</button></article>
+          <article class="card stat-card"><span>🤖</span><div><small>AI Notes</small><strong>NotebookLM</strong></div><button class="mini" data-url="https://notebooklm.google.com">Open ↗</button></article>
+        </div>
+
+        <div class="two-col">
+          <article class="card">
+            <div class="card-head"><h3>Quick Actions</h3><span class="muted">Your shortcuts</span></div>
+            <div class="quick-grid">
+              <button class="quick" data-url="https://mail.google.com"><b>📧</b><span>Gmail</span></button>
+              <button class="quick" data-url="https://drive.google.com"><b>📁</b><span>Drive</span></button>
+              <button class="quick" data-url="https://contacts.google.com"><b>👤</b><span>Contacts</span></button>
+              <button class="quick" data-url="https://www.youtube.com"><b>▶️</b><span>YouTube</span></button>
+              <button class="quick" data-url="https://open.spotify.com"><b>🎵</b><span>Spotify</span></button>
+              <button class="quick" data-url="https://www.google.com/maps"><b>🗺️</b><span>Maps</span></button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h3>My Quick List</h3><button class="text-btn" data-section-jump="tasks">Manage →</button></div>
+            <div id="homeTasks" class="compact-list"></div>
+          </article>
+        </div>
+
+        <div class="two-col">
+          <article class="card">
+            <div class="card-head"><h3>Quick Note</h3><button class="text-btn" data-section-jump="notes">All notes →</button></div>
+            <textarea id="homeNote" class="note-input" placeholder="Type something you don't want to forget..."></textarea>
+            <div class="row-end"><button class="primary small" id="saveHomeNote">Save Note</button></div>
+          </article>
+          <article class="card">
+            <div class="card-head"><h3>Coming in Version 2</h3><span class="pill soft">API READY</span></div>
+            <ul class="roadmap">
+              <li>Google Calendar live events</li>
+              <li>Google Tasks sync</li>
+              <li>Google Keep integration</li>
+              <li>Gmail/Drive widgets</li>
+              <li>Cross-app search</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="apps" class="section">
+        <div class="section-heading"><div><span class="eyebrow">YOUR SERVICES</span><h2>My Apps</h2><p>Apps with no API dependency can simply launch their official website.</p></div></div>
+        <div class="app-grid" id="appGrid"></div>
+      </section>
+
+      <section id="notes" class="section">
+        <div class="section-heading"><div><span class="eyebrow">PRIVATE ON THIS DEVICE</span><h2>Quick Notes</h2><p>These V1 notes are stored locally in this browser. They are not synced to Google Keep yet.</p></div></div>
+        <div class="card note-composer">
+          <input id="noteTitle" placeholder="Note title">
+          <textarea id="noteBody" placeholder="Write your note..."></textarea>
+          <div class="row-end"><button class="primary" id="addNote">Add Note</button></div>
+        </div>
+        <div class="notes-list" id="notesList"></div>
+      </section>
+
+      <section id="tasks" class="section">
+        <div class="section-heading"><div><span class="eyebrow">PRIVATE ON THIS DEVICE</span><h2>Quick Tasks</h2><p>V1 tasks are local. Google Tasks synchronization can be added after OAuth setup.</p></div></div>
+        <div class="card task-composer">
+          <input id="taskInput" placeholder="Add a task and press Enter">
+          <button class="primary" id="addTask">Add Task</button>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>My Tasks</h3><span class="muted" id="taskCount"></span></div>
+          <div id="taskList" class="task-list"></div>
+        </div>
+      </section>
+
+      <section id="tools" class="section">
+        <div class="section-heading"><div><span class="eyebrow">HANDY UTILITIES</span><h2>Tools</h2><p>Small tools that are useful without connecting another service.</p></div></div>
+        <div class="tool-grid">
+          <article class="card tool-card"><h3>⏱️ Focus Timer</h3><div id="timer" class="timer">25:00</div><div class="timer-controls"><button class="primary small" id="timerStart">Start</button><button class="secondary small" id="timerReset">Reset</button></div></article>
+          <article class="card tool-card"><h3>🔗 Useful Links</h3><div class="link-list"><button data-url="https://passwords.google.com">Google Password Manager ↗</button><button data-url="https://myaccount.google.com">Google Account ↗</button><button data-url="https://www.google.com">Google ↗</button></div></article>
+        </div>
+      </section>
+
+      <section id="settings" class="section">
+        <div class="section-heading"><div><span class="eyebrow">PERSONALIZE</span><h2>Settings</h2><p>Your name, theme and app shortcuts are stored locally in this browser.</p></div></div>
+        <div class="card settings-card">
+          <label>Your name<input id="nameInput" placeholder="e.g. Pratik"></label>
+          <label>Start page<select id="startPage"><option value="home">Home</option><option value="apps">My Apps</option><option value="notes">Quick Notes</option><option value="tasks">Quick Tasks</option></select></label>
+          <button class="primary" id="saveSettings">Save Settings</button>
+          <hr>
+          <button class="danger" id="clearLocal">Clear V1 local data</button>
+          <p class="muted small-text">This only clears data saved by this V1 dashboard in this browser. It does not delete anything from Google, Samsung, NotebookLM or other services.</p>
+        </div>
+      </section>
+
+      <footer>Personal Productivity Hub · V1 · Your data stays local until cloud integrations are connected.</footer>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
